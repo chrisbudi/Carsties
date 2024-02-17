@@ -9,8 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuctionService", "src\Aucti
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BEB85B57-BA2D-42B2-9E48-EE8051C46132}"
 	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
 		docker-compose.yml = docker-compose.yml
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SearchService", "SearchService\SearchService.csproj", "{FE208DA1-6592-4924-AA3B-5348259F4C0B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -22,12 +25,17 @@ Global
 		{015B17BF-9851-4B1C-BC7E-40585D254927}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{015B17BF-9851-4B1C-BC7E-40585D254927}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{015B17BF-9851-4B1C-BC7E-40585D254927}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE208DA1-6592-4924-AA3B-5348259F4C0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE208DA1-6592-4924-AA3B-5348259F4C0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE208DA1-6592-4924-AA3B-5348259F4C0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE208DA1-6592-4924-AA3B-5348259F4C0B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{015B17BF-9851-4B1C-BC7E-40585D254927} = {23D83EB5-9898-41B1-99AF-2F7FEE2175D2}
+		{FE208DA1-6592-4924-AA3B-5348259F4C0B} = {23D83EB5-9898-41B1-99AF-2F7FEE2175D2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {00A3BB47-C2E0-465B-828C-357900F219B5}

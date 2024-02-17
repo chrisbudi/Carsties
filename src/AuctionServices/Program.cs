@@ -22,10 +22,6 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 var app = builder.Build();
 
 
-var conn = $"Connection string: {builder.Configuration.GetConnectionString("DefaultConnection")}";
-Debug.WriteLine(conn);
-Console.WriteLine(conn);
-
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -39,8 +35,6 @@ if (app.Environment.IsDevelopment())
         Console.WriteLine(ex.Message);
     }
 }
-
-
 
 app.UseAuthorization();
 

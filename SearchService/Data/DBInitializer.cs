@@ -41,18 +41,18 @@ namespace SearchService.Data
             using var scope = app.Services.CreateScope();
             var httpClient = scope.ServiceProvider.GetRequiredService<AuctionSvcHttpClient>();
 
-            var items = await httpClient.GetItemForSearchDB();
+            //var items = await httpClient.GetItemForSearchDB();
 
-            Console.WriteLine(items.Count + " items return from auction service");
+            //Console.WriteLine(items.Count + " items return from auction service");
 
-            if (items.Count > 0)
-            {
-                await DB.SaveAsync(items);
-            }
-            else
-            {
-                Console.WriteLine("No data to seed");
-            }
+            //if (items.Count > 0)
+            //{
+            //    await DB.SaveAsync(items);
+            //}
+            //else
+            //{
+            //    Console.WriteLine("No data to seed");
+            //}
 
         }
     }

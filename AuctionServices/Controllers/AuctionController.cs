@@ -106,7 +106,7 @@ namespace AuctionService.Controllers
             _context.Remove(auction);
 
 
-            await _publish.Publish(_mapper.Map<AuctionDeleted>(new { Id = auction.Id }));
+            await _publish.Publish<AuctionDeleted>(new { Id = auction.Id });
 
             var result = await _context.SaveChangesAsync() > 0;
             if (!result) return BadRequest("Failed to delete auction");

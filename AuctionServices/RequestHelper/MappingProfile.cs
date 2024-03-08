@@ -19,7 +19,7 @@ namespace AuctionService.RequestHelper
             // profile for publish auction
             CreateMap<AuctionDto, AuctionCreated>();
             CreateMap<Auction, AuctionUpdated>().IncludeMembers(m => m.Item);
-            CreateMap<Auction, Item>();
+            CreateMap<Item, AuctionUpdated>();
         }
     }
 }

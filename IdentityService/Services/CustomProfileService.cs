@@ -20,7 +20,7 @@ namespace IdentityService.Services
             var existingClaims = await _userManager.GetClaimsAsync(user);
 
             var claims = new List<Claim> {
-                new Claim("Username", user.UserName) };
+                new Claim("username", user.UserName) };
 
             context.IssuedClaims.AddRange(claims);
 

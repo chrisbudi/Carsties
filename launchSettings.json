@@ -1,0 +1,19 @@
+{
+  "profiles": {
+    "Docker Compose": {
+      "commandName": "DockerCompose",
+      "commandVersion": "1.0",
+      "composeLaunchAction": "LaunchBrowser",
+      "composeLaunchServiceName": "identity-svc",
+      "composeLaunchUrl": "{Scheme}://localhost:{ServicePort}/{Scheme}://{ServiceHost}:{ServicePort}",
+      "serviceActions": {
+        "auction-svc": "StartDebugging",
+        "identity-svc": "StartDebugging",
+        "mongo": "StartWithoutDebugging",
+        "postgresql": "StartWithoutDebugging",
+        "rabbitmq": "StartWithoutDebugging",
+        "search-svc": "StartDebugging"
+      }
+    }
+  }
+}

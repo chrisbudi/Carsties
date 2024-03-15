@@ -1,12 +1,14 @@
+version: '3.4'
+
 services:
-  postgres:
+  postgresql:
     image: postgres
     ports:
       - "5432:5432"
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgrespw
-      POSTGRES_DB: postgres
+      POSTGRES_DB: auction
     volumes:
       - /var/lib/postgresql/data
   mongo:
@@ -18,11 +20,65 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: mongopw
     volumes:
       - /var/lib/mongodb/data
-  rabitmq:
+  rabbitmq:
     image: rabbitmq:3-management-alpine
     ports:
       - "5672:5672"
       - "15672:15672"
     volumes:
       - /var/lib/rabbitmq/data  
-
+  auction-svc:
+    image: ${DOCKER_REGISTRY-}auction-svc
+    build:
+      context: .
+      dockerfile: AuctionService/Dockerfile
+    environment:
+     - ASPNETCORE_ENVIRONMENT=Development
+     - ASPNETCORE_URLS=http://+:80
+     - RabbitMq__Host=rabbitmq
+     - ConnectionStrings__DefaultConnection=Server=postgresql;uid=postgres;Password=postgrespw;Database=auction;
+     - IdentityServiceUrl=http://identity-svc
+    ports:
+     - 7001:80
+    depends_on:
+     - postgresql
+     - rabbitmq
+  search-svc:
+    image: ${DOCKER_REGISTRY-}search-svc
+    build:
+      context: .
+      dockerfile: SearchService/Dockerfile
+    environment:
+     - ASPNETCORE_ENVIRONMENT=Development
+     - ASPNETCORE_URLS=http://+:80
+     - RabbitMq__Host=rabbitmq
+     - ConnectionStrings__MongoDbConnection=mongodb://root:mongopw@mongo
+     - AuctionServiceUrl=http://auction-svc
+    ports:
+     - 7002:80
+    depends_on:
+     - mongo
+     - rabbitmq                     
+  identity-svc:
+    image: ${DOCKER_REGISTRY-}identity-svc
+    build:
+      context: .
+      dockerfile: IdentityService/Dockerfile
+    environment:
+     - ASPNETCORE_ENVIRONMENT=Docker
+     - ASPNETCORE_URLS=http://+:80
+     - ConnectionStrings__DefaultConnection=Server=postgresql;uid=postgres;Password=postgrespw;Database=identity;
+    ports:
+     - 5000:80
+    depends_on:
+     - postgresql
+  gateway-svc:
+    image: ${DOCKER_REGISTRY-}gateway-svc
+    build:
+      context: .
+      dockerfile: GatewayService/Dockerfile
+    environment:
+     - ASPNETCORE_ENVIRONMENT=Docker
+     - ASPNETCORE_URLS=http://+:80
+    ports:
+     - 6001:80
